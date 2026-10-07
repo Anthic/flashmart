@@ -9,4 +9,9 @@ export class HealthController {
   getLive(): { status: 'ok' } {
     return this.healthService.getLive();
   }
+
+  @Get('ready')
+  async getReady() : Promise<{status : 'ok'}> {
+    return this.healthService.getReady()
+  }
 }

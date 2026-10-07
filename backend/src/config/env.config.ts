@@ -24,6 +24,14 @@ export const environmentSchema = z.object({
     .string()
     .regex(/^\d+(kb|mb)$/i)
     .default('100kb'),
+
+  DATABASE_URL: z
+    .string()
+    .url()
+    .refine(
+      (value) => value.startsWith('postgresql://'),
+      'DATABASE_URL must use the postgresql:// protocol',
+    ),
 });
 
 export type Environment = z.infer<typeof environmentSchema>;
